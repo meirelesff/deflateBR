@@ -3,9 +3,9 @@ deflateBR
 =========
 
 [![Travis-CI Build
-Status](https://travis-ci.org/meirelesff/genderBR.svg?branch=master)](https://travis-ci.org/meirelesff/genderBR)
+Status](https://travis-ci.org/meirelesff/deflateBR.svg?branch=master)](https://travis-ci.org/meirelesff/deflateBR)
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/genderBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/genderBR)
+Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/deflateBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/deflateBR)
 
 The `deflateBR` is an `R` package used to deflate Brazilian Reias in
 nominal values to current Brazilian Reais using the
