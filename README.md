@@ -1,29 +1,42 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-The `ipca` deflates Brazilian Reias in nominal values to current
-Brazilian Reais using the
+deflateBR
+=========
+
+[![Travis-CI Build
+Status](https://travis-ci.org/meirelesff/genderBR.svg?branch=master)](https://travis-ci.org/meirelesff/genderBR)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/genderBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/genderBR)
+
+The `deflateBR` is an `R` package used to deflate Brazilian Reias in
+nominal values to current Brazilian Reais using the
 [IPCA](https://pt.wikipedia.org/wiki/%C3%8Dndices_de_infla%C3%A7%C3%A3o_do_Brasil)
 developed and maitained by the Brazilian Institute of Geography and
 Statistics (IBGE).
 
 How does it work?
-=================
+-----------------
 
-To deflate nominal values in Reais using the `ipca` package, one just
-need to pass a vector with the nominal values, their original dates and
-a reference date used to deflate the series. An example:
+The `deflateBR` package uses the `tidyverse` syntax powered by pipes
+(i.e., `%>%`) to deflate nominal Reais. One just need to pass the
+unquoted names of two variables to the `ipca` function: one containing
+nominal Reais (`numeric`) and a second one contaning the original
+associated dates (`Date`). An example:
 
 ``` r
+library(tidyverse)
 library(ipca)
 
 # Create some data
-reais <- seq(101, 200)
-actual_dates <- seq.Date(from = as.Date("2001-01-01"), by = "month", length.out = 100)
+df <- tibble::tibble(reais = seq(101, 200),
+                     dates = seq.Date(from = as.Date("2001-01-01"), by = "month", length.out = 100)
+                     )
 
-# Deflate nominal values to January 2018
+# Reference date to deflate the nominal values
 reference <- as.Date("2018-01-01")
 
-# Create a vector with fake dates
-ipca(reais, actual_dates, reference)
+# Deflate
+df %>%
+  ipca(reais, dates, reference)
 ```
 
 In particular, the `ipca` function requests three arguments: `values`, a
@@ -34,12 +47,29 @@ to deflate the series (note that the function only deflates nominal
 values by month, so `ref_date = as.Date("2018-01-20")` won’t work, but
 `ref_date = as.Date("2018-01-01")` will).
 
+Optionally, users may pass an additional argument to the function called
+`outname` that sets name of the output variable created by `ipca`
+
 Intalling
 ---------
 
-To install a development version of the `ipca` package, use:
+To install a development version of the `deflateBR` package, use:
 
 ``` r
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("meirelesff/ipca")
+devtools::install_github("meirelesff/deflateBR")
 ```
+
+Citation
+--------
+
+To cite `deflateBR` in publications, please use:
+
+``` r
+citation('deflateBR')
+```
+
+Author
+------
+
+[Fernando Meireles](http://fmeireles.com)

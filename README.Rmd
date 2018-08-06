@@ -14,10 +14,18 @@ knitr::opts_chunk$set(
 )
 ```
 
+# deflateBR
+
+[![Travis-CI Build
+Status](https://travis-ci.org/meirelesff/genderBR.svg?branch=master)](https://travis-ci.org/meirelesff/genderBR)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/genderBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/genderBR)
+
+
 The `deflateBR` is an `R` package used to deflate Brazilian Reias in nominal values to current Brazilian Reais using the [IPCA](https://pt.wikipedia.org/wiki/%C3%8Dndices_de_infla%C3%A7%C3%A3o_do_Brasil) developed and maitained by the Brazilian Institute of Geography and Statistics (IBGE).
 
 
-# How does it work?
+## How does it work?
 
 The `deflateBR` package uses the `tidyverse` syntax powered by pipes (i.e., `%>%`) to deflate nominal Reais. One just need to pass the unquoted names of two variables to the `ipca` function: one containing nominal Reais (`numeric`) and a second one contaning the original associated dates (`Date`). An example:
 
