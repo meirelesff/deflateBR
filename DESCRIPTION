@@ -1,0 +1,17 @@
+Package: deflateBR
+Type: Package
+Title: Deflate Nominal Brazilian Reais Using IPCA
+Version: 1.0.0
+Authors@R: person("Fernando", "Meireles", , "fmeireles@ufmg.br", c("aut", "cre"))
+Description: Simple functions to deflate nominal Brazilian Reais to current Reais using IPCA.
+License: MIT + file LICENSE
+Depends: R (>= 3.1.2)
+Imports: dplyr (>= 0.5.0),
+    readxl,
+    lubridate,
+    rlang
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/meirelesff/deflatebr/
+BugReports: https://github.com/meirelesff/deflatebr/issues/
+RoxygenNote: 6.0.1

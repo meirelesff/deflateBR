@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' IPCA\n#'\n#' Function to deflate\n#'\n#'\n#'\n#'\n#'\n\nipca <- function(x, reference){\n\n\n\n\n\n\n}\n\n",
+    "created" : 1521653521245.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1893357871",
+    "id" : "4F62900B",
+    "lastKnownWriteTime" : 1521653593,
+    "last_content_update" : 1521653593580,
+    "path" : "~/GitHub/ipca/R/ipca.R",
+    "project_path" : "R/ipca.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

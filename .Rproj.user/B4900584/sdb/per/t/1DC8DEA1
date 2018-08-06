@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: ipca\nType: Package\nTitle: What the Package Does (Title Case)\nVersion: 0.1.0\nAuthor: Who wrote it\nMaintainer: The package maintainer <yourself@somewhere.net>\nDescription: More about what it does (maybe more than one line)\n    Use four spaces when indenting paragraphs within the Description.\nLicense: What license is it under?\nEncoding: UTF-8\nLazyData: true",
+    "created" : 1521653506870.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2432224836",
+    "id" : "1DC8DEA1",
+    "lastKnownWriteTime" : 1521653490,
+    "last_content_update" : 1521653490,
+    "path" : "~/GitHub/ipca/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}
