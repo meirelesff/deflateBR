@@ -66,7 +66,8 @@ ipca <- function(data, values, actual_date, ref_date, outname = "def_values"){
   # Deflate series
   data %>%
     dplyr::mutate(actual_date = lubridate::floor_date(!!actual_date_var, unit = "month")) %>%
-    dplyr::mutate(!!outname := !!values_var * ipca$indx[match(!!actual_date_var, ipca$mes)])
+    dplyr::mutate(!!outname := !!values_var * ipca$indx[match(actual_date, ipca$mes)]) %>%
+    dplyr::select(-actual_date)
 }
 
 
