@@ -17,14 +17,14 @@ How does it work?
 -----------------
 
 The `deflateBR` package uses the `tidyverse` syntax powered by pipes
-(i.e., `%>%`) to deflate nominal Reais. One just need to pass the
-unquoted names of two variables to the `ipca` function: one containing
-nominal Reais (`numeric`) and a second one contaning the original
-associated dates (`Date`). An example:
+(i.e., `%>%`) to deflate nominal Reais. One just needs to pass the
+unquoted names of two variables to the packages’ main function, `ipca`:
+one containing nominal Reais (`numeric`) and a second one contaning the
+original associated dates (`Date`). An example:
 
 ``` r
 library(tidyverse)
-library(ipca)
+library(deflateBR)
 
 # Create some data
 df <- tibble::tibble(reais = seq(101, 200),
@@ -37,6 +37,23 @@ reference <- as.Date("2018-01-01")
 # Deflate
 df %>%
   ipca(reais, dates, reference)
+#> 
+#> Downloading necessary data from IBGE's Sidra.
+#> ...
+#> # A tibble: 100 x 4
+#>    reais dates      actual_date def_values
+#>    <int> <date>     <date>           <dbl>
+#>  1   101 2001-01-01 2001-01-01        294.
+#>  2   102 2001-02-01 2001-02-01        296.
+#>  3   103 2001-03-01 2001-03-01        297.
+#>  4   104 2001-04-01 2001-04-01        299.
+#>  5   105 2001-05-01 2001-05-01        300.
+#>  6   106 2001-06-01 2001-06-01        302.
+#>  7   107 2001-07-01 2001-07-01        300.
+#>  8   108 2001-08-01 2001-08-01        301.
+#>  9   109 2001-09-01 2001-09-01        303.
+#> 10   110 2001-10-01 2001-10-01        303.
+#> # ... with 90 more rows
 ```
 
 In particular, the `ipca` function requests three arguments: `values`, a
