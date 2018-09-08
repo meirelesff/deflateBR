@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536447587629.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3153363584",
+    "id" : "1C821761",
+    "lastKnownWriteTime" : 1536447896,
+    "last_content_update" : 1536447896150,
+    "path" : "~/GitHub/deflateBR/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+        "cursorPosition" : "90,17",
+        "scrollLine" : "79"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
