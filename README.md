@@ -1,18 +1,4 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-    ## -- Attaching packages --------------------------------------------------------------------- tidyverse 1.2.1 --
-
-    ## v ggplot2 3.0.0     v purrr   0.2.5
-    ## v tibble  1.4.2     v dplyr   0.7.6
-    ## v tidyr   0.8.1     v stringr 1.3.1
-    ## v readr   1.1.1     v forcats 0.3.0
-
-    ## -- Conflicts ------------------------------------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-    ## 
-    ## To cite deflateBR in publications, please use: citation('deflateBR')
-
 deflateBR
 =========
 
@@ -23,7 +9,7 @@ deflateBR
 How does it work?
 -----------------
 
-The `deflateBR`'s main function is `deflate`. It just requires three arguments to work: a `numeric` vector of nominal Reais (`nominal_values`); a `Date` vector of corresponding dates (`nominal_dates`); and a reference date in the `DD/MM/YYYY` format (`real_date`), used to deflate the values. An example:
+The `deflateBR`'s main function, `deflate`, requires three arguments to work: a `numeric` vector of nominal Reais (`nominal_values`); a `Date` vector of corresponding dates (`nominal_dates`); and a reference date in the `DD/MM/YYYY` format (`real_date`), used to deflate the values. An example:
 
 ``` r
 # Load the package
@@ -37,9 +23,7 @@ deflate(nominal_values = 100, nominal_dates = as.Date("2000-01-01"), real_date =
 #> [1] 310.3893
 ```
 
-Behind the scenes, `deflateBR` requests data from [IPEADATA](http://www.ipeadata.gov.br/)'s API on one these five Brazilian price indexes: [IPCA](https://ww2.ibge.gov.br/english/estatistica/indicadores/precos/inpc_ipca/defaultinpc.shtm) and [INPC](https://ww2.ibge.gov.br/english/estatistica/indicadores/precos/inpc_ipca/defaultinpc.shtm), maintained by [IBGE](https://ww2.ibge.gov.br/home/); and [IGP-M](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B6160B0D7D), [IGP-DI](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B6160B0D7D), and [IPC](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B7350710C7) maintained by [FGV/IBRE](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E2C4C011D8E33F5700158).
-
-To select one of the available price indexes, just provide one of the following options to the `index =` argument: `ipca`, `igpm`, `igpdi`, `ipc`, and `inpc`.
+Behind the scenes, `deflateBR` requests data from [IPEADATA](http://www.ipeadata.gov.br/)'s API on one these five Brazilian price indexes: [IPCA](https://ww2.ibge.gov.br/english/estatistica/indicadores/precos/inpc_ipca/defaultinpc.shtm) and [INPC](https://ww2.ibge.gov.br/english/estatistica/indicadores/precos/inpc_ipca/defaultinpc.shtm), maintained by [IBGE](https://ww2.ibge.gov.br/home/); and [IGP-M](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B6160B0D7D), [IGP-DI](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B6160B0D7D), and [IPC](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B7350710C7) maintained by [FGV/IBRE](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E2C4C011D8E33F5700158). To select one of the available price indexes, just provide one of the following options to the `index =` argument: `ipca`, `igpm`, `igpdi`, `ipc`, and `inpc`. In the following, the INPC index is used.
 
 ``` r
 # Deflate January 2000 reais using the FGV/IBRE's INCP price index
@@ -50,7 +34,7 @@ deflate(100, as.Date("2000-01-01"), "01/01/2018", index = "inpc")
 #> [1] 318.1845
 ```
 
-With the same syntax, a vector of nominal Reais can also be deflated:
+With the same syntax, a vector of nominal Reais can also be deflated, what is useful while working with `data.frames`:
 
 ``` r
 # Create some data
@@ -69,7 +53,9 @@ head(deflate(df$reais, df$dates, reference, "igpdi"))
 #> [1] 341.0412 342.7393 344.9315 345.5051 344.9379 346.6979
 ```
 
-For `tidyverse` users, the `deflate` function can be used inside code chains:
+### Working with the tidyverse
+
+For `tidyverse` users, the `deflate` function can be easily used inside code chains:
 
 ``` r
 library(tidyverse)

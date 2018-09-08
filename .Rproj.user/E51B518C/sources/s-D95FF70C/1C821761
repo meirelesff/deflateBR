@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3153363584",
+    "hash" : "0",
     "id" : "1C821761",
-    "lastKnownWriteTime" : 1536447896,
-    "last_content_update" : 1536447896150,
+    "lastKnownWriteTime" : 1536448232,
+    "last_content_update" : 1536448232189,
     "path" : "~/GitHub/deflateBR/README.Rmd",
     "project_path" : "README.Rmd",
     "properties" : {
-        "cursorPosition" : "90,17",
-        "scrollLine" : "79"
+        "cursorPosition" : "72,67",
+        "scrollLine" : "67"
     },
     "relative_order" : 3,
     "source_on_save" : false,
