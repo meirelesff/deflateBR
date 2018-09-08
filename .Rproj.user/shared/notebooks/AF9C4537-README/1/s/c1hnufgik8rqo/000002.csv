@@ -1,0 +1,11 @@
+"0","# Deflate January 2000 reais using the FGV/IBRE's INCP price index"
+"0","deflate(100, as.Date(""2000-01-01""), ""01/01/2018"", index = ""inpc"")"
+"2","
+Downloading necessary data from IPEA's API
+...
+
+"
+"1","[1]"
+"1"," 318.1845"
+"1","
+"

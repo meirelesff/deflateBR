@@ -1,0 +1,22 @@
+"0","# Create some data"
+"0","df <- tibble::tibble(reais = seq(101, 200),"
+"0","                     dates = seq.Date(from = as.Date(""2001-01-01""), by = ""month"", length.out = 100)"
+"0","                     )"
+"0","# Reference date to deflate the nominal values"
+"0","reference <- ""01/01/2018"""
+"0","# Deflate using IGP-DI"
+"0","head(deflate(df$reais, df$dates, reference, ""igpdi""))"
+"2","
+Downloading necessary data from IPEA's API
+...
+
+"
+"1","[1]"
+"1"," 341.0412"
+"1"," 342.7393"
+"1"," 344.9315"
+"1"," 345.5051"
+"1"," 344.9379"
+"1"," 346.6979"
+"1","
+"

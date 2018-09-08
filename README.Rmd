@@ -12,6 +12,9 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "README-"
 )
+
+library(tidyverse)
+library(deflateBR)
 ```
 
 # deflateBR
@@ -22,38 +25,74 @@ Status](https://travis-ci.org/meirelesff/deflateBR.svg?branch=master)](https://t
 Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/deflateBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/deflateBR)
 
 
-The `deflateBR` is an `R` package used to deflate Brazilian Reias in nominal values to current Brazilian Reais using the [IPCA](https://pt.wikipedia.org/wiki/%C3%8Dndices_de_infla%C3%A7%C3%A3o_do_Brasil) developed and maitained by the Brazilian Institute of Geography and Statistics (IBGE).
+The `deflateBR` is an `R` package used to deflate nominal Brazilian Reias using several popular price indexes.
 
 
 ## How does it work?
 
-The `deflateBR` package uses the `tidyverse` syntax powered by pipes (i.e., `%>%`) to deflate nominal Reais. One just needs to pass the unquoted names of two variables to the packages' main function, `ipca`: one containing nominal Reais (`numeric`) and a second one contaning the original associated dates (`Date`). An example:
+The `deflateBR`'s main function is `deflate`, that requests three arguments to work: a `numeric` vector of nominal Reais (`nominal_values`); a `Date` vector of corresponding dates (`nominal_dates`); and a reference date in the `DD/MM/YYYY` format (`real_date`), used to deflate the values.
 
 ```{r}
-library(tidyverse)
+# Load the package
 library(deflateBR)
 
+# Deflate January 2000 reais
+deflate(nominal_values = 100, nominal_dates = as.Date("2000-01-01"), real_date = "01/01/2018")
+```
+
+Behind the scenes, the `deflateBR` package makes use of the [IPEADATA](http://www.ipeadata.gov.br/)'s API to download historical series of one the five Brazilian price indexes: [IPCA](https://ww2.ibge.gov.br/english/estatistica/indicadores/precos/inpc_ipca/defaultinpc.shtm) and [INPC](https://ww2.ibge.gov.br/english/estatistica/indicadores/precos/inpc_ipca/defaultinpc.shtm), maintained by [IBGE](https://ww2.ibge.gov.br/home/); and [IGP-M](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B6160B0D7D), [IGP-DI](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B6160B0D7D), and [IPC](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E34B9011D92B7350710C7) maintained by [FGV/IBRE](http://portalibre.fgv.br/main.jsp?lumChannelId=402880811D8E2C4C011D8E33F5700158).
+
+To select one of the available price indexes, just provide one of the following options to the `index =` argument: `ipca`, `igpm`, `igpdi`, `ipc`, and `inpc`. An example:
+
+```{r}
+# Deflate January 2000 reais using the FGV/IBRE's INCP price index
+deflate(100, as.Date("2000-01-01"), "01/01/2018", index = "inpc")
+```
+
+With the same syntax, a vector of nominal Reais can also be deflated:
+
+```{r}
 # Create some data
 df <- tibble::tibble(reais = seq(101, 200),
                      dates = seq.Date(from = as.Date("2001-01-01"), by = "month", length.out = 100)
                      )
 
 # Reference date to deflate the nominal values
-reference <- as.Date("2018-01-01")
+reference <- "01/01/2018"
 
-# Deflate
-df %>%
-  ipca(reais, dates, reference)
-
+# Deflate using IGP-DI
+head(deflate(df$reais, df$dates, reference, "igpdi"))
 ```
 
-In particular, the `ipca` function requests three arguments: `values`, a `numeric` vector containing nominal Brazilian Reais; `actual_date`, a vector of class `Date` with the `values`' associated dates; and `ref_date`, an object of class `Date` containing the reference date used to deflate the series (note that the function only deflates nominal values by month, so `ref_date = as.Date("2018-01-20")` won't work, but `ref_date = as.Date("2018-01-01")` will).
+For `tidyverse` users, the `deflate` function can also be used inside chains of code:
 
-Optionally, users may pass an additional argument to the function called `outname` that sets name of the output variable created by `ipca`
+```{r}
+library(tidyverse)
+
+df %>%
+  mutate(deflated_reais = deflate(reais, dates, reference, "ipca"))
+```
+
+
+### Convenience functions
+
+To facilitate the task of deflating nominal Reais, the `deflateBR` package also provides two convenience functions: `ipca` and `igpm`, that deflate nominal values using the IPCA and IGP-M indexes, respectivelly. 
+
+```{r eval=FALSE}
+# Deflate January 2000 reais using the IGP-M
+igpm(100, as.Date("2000-01-01"), "01/01/2018")
+```
+
 
 ## Intalling
 
-To install a development version of the `deflateBR` package, use:
+Install the latest released version from CRAN with:
+
+```{r}
+install.packages("deflateBR")
+```
+
+To install a development version of the package, use:
 ```{r, eval=FALSE}
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("meirelesff/deflateBR")

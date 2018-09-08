@@ -1,0 +1,8 @@
+"0","library(tidyverse)"
+"0","df %>%"
+"0","  mutate(deflated_reais = deflate(reais, dates, reference, ""ipca""))"
+"2","
+Downloading necessary data from IPEA's API
+...
+
+"
