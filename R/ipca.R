@@ -1,7 +1,7 @@
 #' Deflate Nominal Brazilian Reais Using IPCA
 #'
 #' @description
-#' \code{ipca()} is a convenience function to deflate nominal Brazilian Reais using the IBGE's IPCA price index.
+#' \code{ipca()} is a convenience function to deflate nominal Brazilian Reais using the Brazilian Institute of Geography and Statistics' IPCA price index.
 #'
 #' @param nominal_values A \code{numeric} vector containing nominal Brazilian Reais to deflate.
 #' @param nominal_dates A \code{Date} vector with corresponding nominal dates (i.e., when nominal values were measured).

@@ -1,7 +1,7 @@
 #' Deflate Nominal Brazilian Reais Using IGP-M
 #'
 #' @description
-#' \code{ipgm()} is a convenience function to deflate nominal Brazilian Reais using the FGV's IGP-M price index.
+#' \code{ipgm()} is a convenience function to deflate nominal Brazilian Reais using the Getulio Vargas Foundation's IGP-M price index.
 #'
 #' @param nominal_values A \code{numeric} vector containing nominal Brazilian Reais to deflate.
 #' @param nominal_dates A \code{Date} vector with corresponding nominal dates (i.e., when nominal values were measured).

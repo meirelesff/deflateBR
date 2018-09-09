@@ -23,12 +23,12 @@ standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/public
 A \code{numeric} vector.
 }
 \description{
-\code{deflate()} uses data from IPEA's API to adjust nominal Brazilian Reais for inflation.
+\code{deflate()} uses data from the Brazilian Institute for Applied Economic Research's API (IPEADATA) to adjust nominal Brazilian Reais for inflation.
 }
 \details{
 Each one of the five price indexes included
-in the function are maintained by two Brazilian agencies: IPCA and INPC indexes are maintained by IBGE;
-IGP-M, IGP-DI, and IPC are maintained by FGV/IBRE. For an overview of the indexes' methodologies and covered periods, check the Brazilian Central Bank official \href{https://www.bcb.gov.br/conteudo/home-en/FAQs/FAQ\%2002-Price\%20Indices.pdf}{FAQ}.
+in the function are maintained by two Brazilian agencies: IPCA and INPC indexes are maintained by Brazilian Institute of Geography and Statistics (IBGE);
+IGP-M, IGP-DI, and IPC are maintained by Getulio Vargas Foundation (FGV). For an overview of the indexes' methodologies and covered periods, check the Brazilian Central Bank official \href{https://www.bcb.gov.br/conteudo/home-en/FAQs/FAQ\%2002-Price\%20Indices.pdf}{FAQ}.
 }
 \examples{
 \dontrun{
@@ -44,6 +44,6 @@ deflate(reais, actual_dates, "01/01/2018", "igpm")
 
 }
 \references{
-For more information on the IPEA's data, please check (in Portuguese):
+For more information on the Brazilian Institute for Applied Economic Research's API, please check (in Portuguese):
 \url{http://www.ipeadata.gov.br/}.
 }

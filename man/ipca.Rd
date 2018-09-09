@@ -19,7 +19,7 @@ standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/public
 A \code{numeric} vector.
 }
 \description{
-\code{ipca()} is a convenience function to deflate nominal Brazilian Reais using the IBGE's IPCA price index.
+\code{ipca()} is a convenience function to deflate nominal Brazilian Reais using the Brazilian Institute of Geography and Statistics' IPCA price index.
 }
 \examples{
 \dontrun{

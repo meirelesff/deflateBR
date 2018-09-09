@@ -1,7 +1,7 @@
 #' Deflate Nominal Brazilian Reais Using Various Price Indexes
 #'
 #' @description
-#' \code{deflate()} uses data from IPEA's API to adjust nominal Brazilian Reais for inflation.
+#' \code{deflate()} uses data from the Brazilian Institute for Applied Economic Research's API (IPEADATA) to adjust nominal Brazilian Reais for inflation.
 #'
 #' @param nominal_values A \code{numeric} vector containing nominal Brazilian Reais to deflate.
 #' @param nominal_dates A \code{Date} vector with corresponding nominal dates (i.e., when nominal values were measured).
@@ -12,10 +12,10 @@
 #' \code{igpdi}, \code{ipc}, and \code{inpc}.
 #'
 #' @details Each one of the five price indexes included
-#' in the function are maintained by two Brazilian agencies: IPCA and INPC indexes are maintained by IBGE;
-#' IGP-M, IGP-DI, and IPC are maintained by FGV/IBRE. For an overview of the indexes' methodologies and covered periods, check the Brazilian Central Bank official \href{https://www.bcb.gov.br/conteudo/home-en/FAQs/FAQ\%2002-Price\%20Indices.pdf}{FAQ}.
+#' in the function are maintained by two Brazilian agencies: IPCA and INPC indexes are maintained by Brazilian Institute of Geography and Statistics (IBGE);
+#' IGP-M, IGP-DI, and IPC are maintained by Getulio Vargas Foundation (FGV). For an overview of the indexes' methodologies and covered periods, check the Brazilian Central Bank official \href{https://www.bcb.gov.br/conteudo/home-en/FAQs/FAQ\%2002-Price\%20Indices.pdf}{FAQ}.
 #'
-#' @references For more information on the IPEA's data, please check (in Portuguese):
+#' @references For more information on the Brazilian Institute for Applied Economic Research's API, please check (in Portuguese):
 #' \url{http://www.ipeadata.gov.br/}.
 #'
 #' @return A \code{numeric} vector.

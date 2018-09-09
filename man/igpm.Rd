@@ -19,7 +19,7 @@ standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/public
 A \code{numeric} vector.
 }
 \description{
-\code{ipgm()} is a convenience function to deflate nominal Brazilian Reais using the FGV's IGP-M price index.
+\code{ipgm()} is a convenience function to deflate nominal Brazilian Reais using the Getulio Vargas Foundation's IGP-M price index.
 }
 \examples{
 \dontrun{
