@@ -25,7 +25,7 @@ Status](https://travis-ci.org/meirelesff/deflateBR.svg?branch=master)](https://t
 Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/deflateBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/deflateBR)
 
 
-`deflateBR` is an `R` package used to deflate nominal Brazilian Reias using several popular price indexes.
+`deflateBR` is an `R` package used to deflate nominal Brazilian Reais using several popular price indexes.
 
 
 ## How does it work?

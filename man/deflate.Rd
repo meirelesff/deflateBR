@@ -23,7 +23,7 @@ standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/public
 A \code{numeric} vector.
 }
 \description{
-\code{deflate()} uses data from IPEA's API to deflate nominal Brazilian Reais.
+\code{deflate()} uses data from IPEA's API to adjust nominal Brazilian Reais for inflation.
 }
 \details{
 Each one of the five price indexes included
