@@ -1,4 +1,7 @@
+~%2FGitHub%2FdeflateBR%2F.gitignore="5C6A0851"
+~%2FGitHub%2FdeflateBR%2F.travis.yml="CF4A1170"
 ~%2FGitHub%2FdeflateBR%2FDESCRIPTION="AB4E21B7"
+~%2FGitHub%2FdeflateBR%2FLICENSE="26D98F1B"
 ~%2FGitHub%2FdeflateBR%2FR%2Fconvenience.R="58D02FAE"
 ~%2FGitHub%2FdeflateBR%2FR%2Fdeflate.R="5C795F9D"
 ~%2FGitHub%2FdeflateBR%2FR%2Figpm.R="C58C7129"
@@ -6,3 +9,4 @@
 ~%2FGitHub%2FdeflateBR%2FR%2Futils.R="94029467"
 ~%2FGitHub%2FdeflateBR%2FREADME.Rmd="7FB47E98"
 ~%2FGitHub%2FdeflateBR%2Fcran-comments.md="C27E234A"
+~%2FGitHub%2FdeflateBR%2Fvignettes%2Fdeflating_brazilian_reais_with_deflatebr.Rmd="33DA4398"

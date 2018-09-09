@@ -90,8 +90,8 @@ To facilitate the task of deflating nominal Reais, the `deflateBR` package also 
 igpm(100, as.Date("2000-01-01"), "01/01/2018")
 ```
 
-Intalling
----------
+Installing
+----------
 
 Install the latest released version from CRAN with:
 
@@ -104,6 +104,19 @@ To install the development version of the package, use:
 ``` r
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("meirelesff/deflateBR")
+```
+
+Methodology
+-----------
+
+Following standard practice, seconded by the [Brazilian Central Bank](https://www3.bcb.gov.br/CALCIDADAO/publico/metodologiaCorrigirIndice.do?method=metodologiaCorrigirIndice), the `deflateBR` adjusts for inflation by multiplying nominal Reais by the ratio between the original and the reference price indexes. For example, if we want to adjust 100 reais of January 2018, with IPCA index of 4916.46, to August 2018, with IPCA of 5056.56, we first calculate the ratio between the two indexes (e.g., 5056.56 / 4916.46 = 1.028496) and then multiply this value by 100 (e.g., 102.84 adjusted Reais). The `deflate` function gives exactly the same result:
+
+``` r
+deflate(100, as.Date("2018-01-01"), "01/08/2018", "ipca")
+#> 
+#> Downloading necessary data from IPEA's API
+#> ...
+#> [1] 102.8496
 ```
 
 Citation

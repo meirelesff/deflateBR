@@ -1,0 +1,11 @@
+"0","deflate(100, as.Date(""2018-01-01""), ""01/08/2018"", ""ipca"")
+"
+"2","
+Downloading necessary data from IPEA's API
+...
+
+"
+"1","[1]"
+"1"," 102.8496"
+"1","
+"
