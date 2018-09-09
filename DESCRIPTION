@@ -16,4 +16,3 @@ BugReports: https://github.com/meirelesff/deflatebr/issues/
 RoxygenNote: 6.1.0
 Suggests: knitr,
     rmarkdown
-VignetteBuilder: knitr

@@ -28,7 +28,7 @@ A \code{numeric} vector.
 \details{
 Each one of the five price indexes included
 in the function are maintained by two Brazilian agencies: IPCA and INPC indexes are maintained by IBGE;
-IGP-M, IGP-DI, and IPC are maintained by FGV/IBRE. For an overview of the indexes' methodologies and their coverages, check the Brazilian Central Bank official \href{https://www.bcb.gov.br/conteudo/home-en/FAQs/FAQ\%2002-Price\%20Indices.pdf}{FAQ}.
+IGP-M, IGP-DI, and IPC are maintained by FGV/IBRE. For an overview of the indexes' methodologies and covered periods, check the Brazilian Central Bank official \href{https://www.bcb.gov.br/conteudo/home-en/FAQs/FAQ\%2002-Price\%20Indices.pdf}{FAQ}.
 }
 \examples{
 \dontrun{
