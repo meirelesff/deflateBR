@@ -32,5 +32,5 @@ inflation <- function(initial_date, end_date, index = c("ipca", "inpc", "igpm", 
   initial_date <- lubridate::dmy(initial_date)
 
   # Inflation rate
-  (deflate(1, initial_date, end_date, index) - 1) * 100
+  deflate(100, initial_date, end_date, index) - 100
 }
