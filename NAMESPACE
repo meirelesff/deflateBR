@@ -3,6 +3,7 @@
 export(deflate)
 export(igpdi)
 export(igpm)
+export(inflation)
 export(inpc)
 export(ipc)
 export(ipca)

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1536516499676.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E684772D",
+    "lastKnownWriteTime" : 1536517584,
+    "last_content_update" : 1536517584174,
+    "path" : "~/GitHub/deflateBR/R/inflation.R",
+    "project_path" : "R/inflation.R",
+    "properties" : {
+        "cursorPosition" : "35,1",
+        "scrollLine" : "15",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

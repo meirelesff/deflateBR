@@ -87,6 +87,12 @@ Or, using the IPCA index:
 ipca(100, as.Date("2000-01-01"), "01/01/2018")
 ```
 
+In addition, the `deflateBR` package contains a function called `inflation` that calculates the inflation rate between two dates quickly. Providing initial and end dates in the DD/MM/YYYY format, plus one price index, the function returns the inflation rate in percent:
+
+```{r}
+# Inflation rate between January and December of 2017
+inflation("01/01/2017", "01/12/2017", "ipca")
+```
 
 ## Installing
 
