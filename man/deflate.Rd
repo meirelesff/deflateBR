@@ -10,11 +10,12 @@ deflate(nominal_values, nominal_dates, real_date, index = c("ipca",
 \arguments{
 \item{nominal_values}{A \code{numeric} vector containing nominal Brazilian Reais to deflate.}
 
-\item{nominal_dates}{A \code{Date} vector with corresponding nominal dates (i.e., when nominal values were measured).}
+\item{nominal_dates}{A \code{Date} vector with corresponding nominal dates (i.e., when nominal values were measured).
+Values are set to the previous month, following the
+standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/publico/metodologiaCorrigirIndice.do?method=metodologiaCorrigirIndice}{Brazilian Central Bank}.}
 
 \item{real_date}{A value indicating the reference date to deflate nominal values in the format
-'DD/MM/YYYY' (e.g., '01/01/2018' for January 2018). Values are rounded to the previous month, following the
-standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/publico/metodologiaCorrigirIndice.do?method=metodologiaCorrigirIndice}{Brazilian Central Bank}.}
+'MM/YYYY' (e.g., '01/2018' for January 2018).}
 
 \item{index}{Indicates the price index used to deflate nominal Reais. Valid options are: \code{ipca}, \code{igpm},
 \code{igpdi}, \code{ipc}, and \code{inpc}.}
@@ -36,10 +37,10 @@ IGP-M, IGP-DI, and IPC are maintained by Getulio Vargas Foundation (FGV). For an
 reais <- rep(100, 5)
 actual_dates <- seq.Date(from = as.Date("2001-01-01"), to = as.Date("2001-05-01"), by = "month")
 
-deflate(reais, actual_dates, "01/01/2018", "ipca")
+deflate(reais, actual_dates, "01/2018", "ipca")
 
 # Using IGP-M index
-deflate(reais, actual_dates, "01/01/2018", "igpm")
+deflate(reais, actual_dates, "01/2018", "igpm")
 }
 
 }

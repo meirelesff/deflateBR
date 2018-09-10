@@ -8,9 +8,9 @@ inflation(initial_date, end_date, index = c("ipca", "inpc", "igpm",
   "igpdi", "ipc"))
 }
 \arguments{
-\item{initial_date}{Initial date in the 'DD/MM/YYYY' format (\code{character}).}
+\item{initial_date}{Initial date in the 'MM/YYYY' format (\code{character}).}
 
-\item{end_date}{End date in the 'DD/MM/YYYY' format (\code{character}).}
+\item{end_date}{End date in the 'MM/YYYY' format (\code{character}).}
 
 \item{index}{One of the following options: \code{ipca}, \code{inpc}, \code{igpm}, \code{igpdi}, and \code{ipc}. Each one
 of these options uses the following price indexes, respectively: IPCA and INPC indexes maintained by Brazilian Institute of Geography and Statistics (IBGE); and
@@ -26,10 +26,10 @@ The inflation rate, in percent, between \code{initial_date} and \code{end_date}.
 \examples{
 \dontrun{
 # Inflation rate between January 2010 to January 2018 calculated using IPCA price index
-inflation("01/01/2010", "01/01/2018", "ipca")
+inflation("01/2010", "01/2018", "ipca")
 
 # Inflation rate between January 2014 to December 2014 calculated using IGP-M price index
-inflation("01/01/2014", "01/12/2014", "igpm")
+inflation("01/2014", "12/2014", "igpm")
 }
 
 }
