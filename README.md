@@ -25,11 +25,10 @@ library(deflateBR)
 
 # Deflate January 2000 reais
 deflate(nominal_values = 100, nominal_dates = as.Date("2000-01-01"), real_date = "01/2018")
-#> Warning: All formats failed to parse. No formats found.
 #> 
 #> Downloading necessary data from IPEA's API
 #> ...
-#> [1] NA
+#> [1] 310.3893
 ```
 
 Behind the scenes, `deflateBR` requests data from
@@ -52,11 +51,10 @@ following options to the `index =` argument: `ipca`, `igpm`, `igpdi`,
 ``` r
 # Deflate January 2000 reais using the FGV/IBRE's INCP price index
 deflate(100, as.Date("2000-01-01"), "01/2018", index = "inpc")
-#> Warning: All formats failed to parse. No formats found.
 #> 
 #> Downloading necessary data from IPEA's API
 #> ...
-#> [1] NA
+#> [1] 318.1845
 ```
 
 With the same syntax, a vector of nominal Reais can also be deflated,
@@ -73,11 +71,10 @@ reference <- "01/2018"
 
 # Deflate using IGP-DI
 head(deflate(df$reais, df$dates, reference, "igpdi"))
-#> Warning: All formats failed to parse. No formats found.
 #> 
 #> Downloading necessary data from IPEA's API
 #> ...
-#> [1] NA NA NA NA NA NA
+#> [1] 341.0412 342.7393 344.9315 345.5051 344.9379 346.6979
 ```
 
 ### Working with the tidyverse
@@ -90,23 +87,22 @@ library(tidyverse)
 
 df %>%
   mutate(deflated_reais = deflate(reais, dates, reference, "ipca"))
-#> Warning: All formats failed to parse. No formats found.
 #> 
 #> Downloading necessary data from IPEA's API
 #> ...
 #> # A tibble: 100 x 3
 #>    reais dates      deflated_reais
 #>    <int> <date>              <dbl>
-#>  1   101 2001-01-01             NA
-#>  2   102 2001-02-01             NA
-#>  3   103 2001-03-01             NA
-#>  4   104 2001-04-01             NA
-#>  5   105 2001-05-01             NA
-#>  6   106 2001-06-01             NA
-#>  7   107 2001-07-01             NA
-#>  8   108 2001-08-01             NA
-#>  9   109 2001-09-01             NA
-#> 10   110 2001-10-01             NA
+#>  1   101 2001-01-01           296.
+#>  2   102 2001-02-01           297.
+#>  3   103 2001-03-01           299.
+#>  4   104 2001-04-01           300.
+#>  5   105 2001-05-01           301.
+#>  6   106 2001-06-01           303.
+#>  7   107 2001-07-01           304.
+#>  8   108 2001-08-01           303.
+#>  9   109 2001-09-01           304.
+#> 10   110 2001-10-01           306.
 #> # ... with 90 more rows
 ```
 
@@ -136,13 +132,10 @@ price index, the function returns the inflation rate in percent:
 ``` r
 # Inflation rate between January and December of 2017
 inflation("01/2017", "12/2017", "ipca")
-#> Warning: All formats failed to parse. No formats found.
-
-#> Warning: All formats failed to parse. No formats found.
 #> 
 #> Downloading necessary data from IPEA's API
 #> ...
-#> [1] NA
+#> [1] 2.947421
 ```
 
 Installing
@@ -176,11 +169,10 @@ adjusted Reais). The `deflate` function gives exactly the same result:
 
 ``` r
 deflate(100, as.Date("2018-01-01"), "08/2018", "ipca")
-#> Warning: All formats failed to parse. No formats found.
 #> 
 #> Downloading necessary data from IPEA's API
 #> ...
-#> [1] NA
+#> [1] 102.8496
 ```
 
 Citation
