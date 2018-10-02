@@ -38,6 +38,12 @@
 
 deflate <- function(nominal_values, nominal_dates, real_date, index = c("ipca", "igpm", "igpdi", "ipc", "inpc")){
 
+  # Parse zoo/xts input
+  if ("zoo" %in% rownames(installed.packages()) && zoo::is.zoo(nominal_values)) {
+    nominal_dates <- zoo::index(nominal_values)
+    nominal_values <- zoo::coredata(nominal_values)
+  }
+
 
   # Inputs
   real_date <- clean_real_date(real_date)
