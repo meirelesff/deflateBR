@@ -15,6 +15,8 @@
 #' @param index Indicates the price index used to deflate nominal Reais. Valid options are: \code{ipca}, \code{igpm},
 #' \code{igpdi}, \code{ipc}, and \code{inpc}.
 #' @param verbose Logical indicating whether to show progress messages and progress bar during data download. Default is TRUE.
+#' @param cache Logical indicating whether to use local caching to store downloaded price index data. 
+#' When TRUE, data is saved locally and reused in subsequent calls, improving performance. Default is TRUE.
 #'
 #' @details Each one of the five price indexes included
 #' in the function are maintained by two Brazilian agencies: IPCA and INPC indexes are maintained by Brazilian Institute of Geography and Statistics (IBGE);
@@ -42,12 +44,15 @@
 #' 
 #' # Silent operation without progress messages
 #' deflate(reais, actual_dates, as.Date("2018-01-01"), "ipca", verbose = FALSE)
+#' 
+#' # Disable caching (always download fresh data)
+#' deflate(reais, actual_dates, "01/2018", "ipca", cache = FALSE)
 #' }
 #'
 #' @importFrom lubridate %m-%
 #' @export
 
-deflate <- function(nominal_values, nominal_dates, real_date, index = c("ipca", "igpm", "igpdi", "ipc", "inpc"), verbose = TRUE){
+deflate <- function(nominal_values, nominal_dates, real_date, index = c("ipca", "igpm", "igpdi", "ipc", "inpc"), verbose = TRUE, cache = TRUE){
 
 
   # Inputs
@@ -62,7 +67,7 @@ deflate <- function(nominal_values, nominal_dates, real_date, index = c("ipca", 
 
 
   # Get price index data
-  indice <- get_price_index_data(index, verbose = verbose)
+  indice <- get_price_index_data_cached(index, cache = cache, verbose = verbose)
 
   # Calculate changes in prices
   indice$indx <- indice$VALVALOR[indice$VALDATA == real_date] / indice$VALVALOR

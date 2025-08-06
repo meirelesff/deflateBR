@@ -8,21 +8,6 @@ Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/deflateBR?
 `deflateBR` is an `R` package used to deflate nominal Brazilian Reais
 using several popular price indexes.
 
-## What’s New in Version 1.2.0
-
-This major release brings significant improvements:
-
--   **Simplified interface**: Unified `deflate()` function replaces
-    previous wrapper functions
--   **Flexible date input**: Reference dates now accept both strings
-    (‘MM/YYYY’) and Date objects  
--   **Enhanced API handling**: Improved error handling, retry
-    mechanisms, and progress feedback
--   **Better user experience**: Optional verbose mode and cleaner
-    architecture
-
-See `NEWS.md` for complete details and migration guide.
-
 ## How does it work?
 
 The `deflateBR`‘s main function, `deflate`, requires three mandatory
@@ -40,7 +25,9 @@ library(deflateBR)
 
 # Deflate January 2000 reais
 deflate(nominal_values = 100, nominal_dates = as.Date("2000-01-01"), real_date = "01/2018")
-#>   |                                                                              |                                                                      |   0%  |                                                                              |=============                                                         |  19%  |                                                                              |=========================================                             |  59%  |                                                                              |======================================================================| 100%
+#> Found valid cache for IPCA index (547 records)
+#> Loading IPCA data from cache...
+#> Loaded 547 records from cache (1979-12 to 2025-06)
 #> [1] 310.3893
 ```
 
@@ -64,7 +51,9 @@ following options to the `index =` argument: `ipca`, `igpm`, `igpdi`,
 ``` r
 # Deflate January 2000 reais using the INPC price index
 deflate(100, as.Date("2000-01-01"), "01/2018", index = "inpc")
-#>   |                                                                              |                                                                      |   0%  |                                                                              |===============                                                       |  21%  |                                                                              |================                                                      |  23%  |                                                                              |=============================================                         |  64%  |                                                                              |===============================================                       |  68%  |                                                                              |======================================================================| 100%
+#> Found valid cache for INPC index (556 records)
+#> Loading INPC data from cache...
+#> Loaded 556 records from cache (1979-03 to 2025-06)
 #> [1] 318.1845
 ```
 
@@ -74,8 +63,6 @@ convenience:
 ``` r
 # Same calculation using Date object for reference date
 deflate(100, as.Date("2000-01-01"), as.Date("2018-01-01"), index = "inpc")
-#>   |                                                                              |                                                                      |   0%  |                                                                              |==========================================                            |  60%  |                                                                              |===========================================                           |  62%  |                                                                              |======================================================================| 100%
-#> [1] 318.1845
 ```
 
 For silent operation without progress messages, you can use the
@@ -84,6 +71,35 @@ For silent operation without progress messages, you can use the
 ``` r
 # Silent operation - no progress messages or bars (using Date object)
 deflate(100, as.Date("2000-01-01"), as.Date("2018-01-01"), index = "ipca", verbose = FALSE)
+```
+
+### Data Caching
+
+Starting from version 1.2.0, `deflateBR` includes a caching system that
+stores downloaded price index data locally to improve performance. By
+default, caching is enabled and data is saved to a “cache” directory in
+your working directory:
+
+``` r
+# First call downloads data and saves to cache
+deflate(100, as.Date("2000-01-01"), "01/2018", "ipca")
+#> No cache found for IPCA index
+#> Cache not available, downloading from IPEA API...
+#> Saving IPCA data to cache...
+#> Cached 547 records for IPCA index
+
+# Subsequent calls load from cache (much faster)
+deflate(200, as.Date("2001-01-01"), "01/2018", "ipca")
+#> Found valid cache for IPCA index (547 records)
+#> Loading IPCA data from cache...
+#> Loaded 547 records from cache (1979-12 to 2025-06)
+```
+
+You can disable caching if you always want fresh data from the API:
+
+``` r
+# Disable caching - always download from API
+deflate(100, as.Date("2000-01-01"), "01/2018", "ipca", cache = FALSE)
 ```
 
 With the same syntax, a vector of nominal Reais can also be deflated,
@@ -100,7 +116,9 @@ reference <- "01/2018"
 
 # Deflate using IGP-DI
 head(deflate(df$reais, df$dates, reference, "igpdi"))
-#>   |                                                                              |                                                                      |   0%  |                                                                              |===============                                                       |  21%  |                                                                              |=====================                                                 |  30%  |                                                                              |===========================                                           |  39%  |                                                                              |==============================================                        |  66%  |                                                                              |======================================================================| 100%
+#> Found valid cache for IGPDI index (978 records)
+#> Loading IGPDI data from cache...
+#> Loaded 978 records from cache (1944-01 to 2025-06)
 #> [1] 341.0412 342.7393 344.9315 345.5051 344.9379 346.6979
 ```
 
@@ -114,7 +132,9 @@ library(tidyverse)
 
 df %>%
   mutate(deflated_reais = deflate(reais, dates, reference, "ipca"))
-#>   |                                                                              |                                                                      |   0%  |                                                                              |=============================                                         |  41%  |                                                                              |======================================================================| 100%
+#> Found valid cache for IPCA index (547 records)
+#> Loading IPCA data from cache...
+#> Loaded 547 records from cache (1979-12 to 2025-06)
 #> # A tibble: 100 × 3
 #>    reais dates      deflated_reais
 #>    <int> <date>              <dbl>
@@ -160,7 +180,9 @@ adjusted Reais). The `deflate` function gives exactly the same result:
 
 ``` r
 deflate(100, as.Date("2018-01-01"), "08/2018", "ipca")
-#>   |                                                                              |                                                                      |   0%  |                                                                              |===========================                                           |  39%  |                                                                              |======================================================                |  77%  |                                                                              |====================================================================  |  97%  |                                                                              |======================================================================| 100%
+#> Found valid cache for IPCA index (547 records)
+#> Loading IPCA data from cache...
+#> Loaded 547 records from cache (1979-12 to 2025-06)
 #> [1] 102.8496
 ```
 
