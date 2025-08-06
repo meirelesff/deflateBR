@@ -1,8 +1,8 @@
 Package: deflateBR
 Type: Package
 Title: Deflate Nominal Brazilian Reais
-Version: 1.1.2
-Authors@R: person("Fernando", "Meireles", , "fmeireles@ufmg.br", c("aut", "cre"))
+Version: 1.2.0
+Authors@R: person("Fernando", "Meireles", , "fernando.meireles@iesp.uerj.br", c("aut", "cre"), comment = c(ORCID = "0000-0002-7027-2058"))
 Description: Simple functions to deflate nominal Brazilian Reais using several popular price indexes downloaded from the Brazilian Institute for Applied Economic Research.
 License: MIT + file LICENSE
 Depends: R (>= 3.1.2)

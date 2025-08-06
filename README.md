@@ -1,23 +1,38 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-deflateBR
-=========
 
-[![Travis-CI Build
-Status](https://travis-ci.org/meirelesff/deflateBR.svg?branch=master)](https://travis-ci.org/meirelesff/deflateBR)
+# deflateBR
+
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/deflateBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/deflateBR)
 
 `deflateBR` is an `R` package used to deflate nominal Brazilian Reais
 using several popular price indexes.
 
-How does it work?
------------------
+## What’s New in Version 1.2.0
 
-The `deflateBR`’s main function, `deflate`, requires three arguments to
-work: a `numeric` vector of nominal Reais (`nominal_values`); a `Date`
-vector of corresponding dates (`nominal_dates`); and a reference month
-in the `MM/YYYY` format (`real_date`), used to deflate the values. An
-example:
+This major release brings significant improvements:
+
+-   **Simplified interface**: Unified `deflate()` function replaces
+    previous wrapper functions
+-   **Flexible date input**: Reference dates now accept both strings
+    (‘MM/YYYY’) and Date objects  
+-   **Enhanced API handling**: Improved error handling, retry
+    mechanisms, and progress feedback
+-   **Better user experience**: Optional verbose mode and cleaner
+    architecture
+
+See `NEWS.md` for complete details and migration guide.
+
+## How does it work?
+
+The `deflateBR`‘s main function, `deflate`, requires three mandatory
+arguments to work: a `numeric` vector of nominal Reais
+(`nominal_values`); a `Date` vector of corresponding dates
+(`nominal_dates`); and a reference date (`real_date`), used to deflate
+the values. The reference date can be provided either as a character
+string in ’MM/YYYY’ format or as a Date object. Additionally, you can
+specify the price index using the `index` argument and control output
+verbosity with the `verbose` argument. An example:
 
 ``` r
 # Load the package
@@ -25,9 +40,7 @@ library(deflateBR)
 
 # Deflate January 2000 reais
 deflate(nominal_values = 100, nominal_dates = as.Date("2000-01-01"), real_date = "01/2018")
-#> 
-#> Downloading necessary data from IPEA's API
-#> ...
+#>   |                                                                              |                                                                      |   0%  |                                                                              |=============                                                         |  19%  |                                                                              |=========================================                             |  59%  |                                                                              |======================================================================| 100%
 #> [1] 310.3893
 ```
 
@@ -49,12 +62,28 @@ following options to the `index =` argument: `ipca`, `igpm`, `igpdi`,
 `ipc`, and `inpc`. In the following, the INPC index is used.
 
 ``` r
-# Deflate January 2000 reais using the FGV/IBRE's INCP price index
+# Deflate January 2000 reais using the INPC price index
 deflate(100, as.Date("2000-01-01"), "01/2018", index = "inpc")
-#> 
-#> Downloading necessary data from IPEA's API
-#> ...
+#>   |                                                                              |                                                                      |   0%  |                                                                              |===============                                                       |  21%  |                                                                              |================                                                      |  23%  |                                                                              |=============================================                         |  64%  |                                                                              |===============================================                       |  68%  |                                                                              |======================================================================| 100%
 #> [1] 318.1845
+```
+
+The reference date can also be provided as a Date object for
+convenience:
+
+``` r
+# Same calculation using Date object for reference date
+deflate(100, as.Date("2000-01-01"), as.Date("2018-01-01"), index = "inpc")
+#>   |                                                                              |                                                                      |   0%  |                                                                              |==========================================                            |  60%  |                                                                              |===========================================                           |  62%  |                                                                              |======================================================================| 100%
+#> [1] 318.1845
+```
+
+For silent operation without progress messages, you can use the
+`verbose` parameter:
+
+``` r
+# Silent operation - no progress messages or bars (using Date object)
+deflate(100, as.Date("2000-01-01"), as.Date("2018-01-01"), index = "ipca", verbose = FALSE)
 ```
 
 With the same syntax, a vector of nominal Reais can also be deflated,
@@ -71,9 +100,7 @@ reference <- "01/2018"
 
 # Deflate using IGP-DI
 head(deflate(df$reais, df$dates, reference, "igpdi"))
-#> 
-#> Downloading necessary data from IPEA's API
-#> ...
+#>   |                                                                              |                                                                      |   0%  |                                                                              |===============                                                       |  21%  |                                                                              |=====================                                                 |  30%  |                                                                              |===========================                                           |  39%  |                                                                              |==============================================                        |  66%  |                                                                              |======================================================================| 100%
 #> [1] 341.0412 342.7393 344.9315 345.5051 344.9379 346.6979
 ```
 
@@ -87,10 +114,8 @@ library(tidyverse)
 
 df %>%
   mutate(deflated_reais = deflate(reais, dates, reference, "ipca"))
-#> 
-#> Downloading necessary data from IPEA's API
-#> ...
-#> # A tibble: 100 x 3
+#>   |                                                                              |                                                                      |   0%  |                                                                              |=============================                                         |  41%  |                                                                              |======================================================================| 100%
+#> # A tibble: 100 × 3
 #>    reais dates      deflated_reais
 #>    <int> <date>              <dbl>
 #>  1   101 2001-01-01           296.
@@ -103,43 +128,10 @@ df %>%
 #>  8   108 2001-08-01           303.
 #>  9   109 2001-09-01           304.
 #> 10   110 2001-10-01           306.
-#> # ... with 90 more rows
+#> # ℹ 90 more rows
 ```
 
-### Convenience functions
-
-To facilitate the task of deflating nominal Reais, the `deflateBR`
-package also provides five convenience functions: `ipca`, `inpc`,
-`igpm`, `igpdi`, and `ipc`. Each one of these functions deflate nominal
-values using their corresponding price indexes. For instance, to deflate
-nominal Reais using IGP-M, one can execute the following code:
-
-``` r
-igpm(100, as.Date("2000-01-01"), "01/2018")
-```
-
-Or, using the IPCA index:
-
-``` r
-ipca(100, as.Date("2000-01-01"), "01/2018")
-```
-
-In addition, the `deflateBR` package contains a function called
-`inflation` that calculates the inflation rate between two dates
-quickly. Providing initial and end dates in the MM/YYYY format, plus one
-price index, the function returns the inflation rate in percent:
-
-``` r
-# Inflation rate between January and December of 2017
-inflation("01/2017", "12/2017", "ipca")
-#> 
-#> Downloading necessary data from IPEA's API
-#> ...
-#> [1] 2.947421
-```
-
-Installing
-----------
+## Installing
 
 Install the latest released version from CRAN with:
 
@@ -154,8 +146,7 @@ if (!require("devtools")) install.packages("devtools")
 devtools::install_github("meirelesff/deflateBR")
 ```
 
-Methodology
------------
+## Methodology
 
 Following standard practice, seconded by the [Brazilian Central
 Bank](https://www3.bcb.gov.br/CALCIDADAO/publico/metodologiaCorrigirIndice.do?method=metodologiaCorrigirIndice),
@@ -169,14 +160,11 @@ adjusted Reais). The `deflate` function gives exactly the same result:
 
 ``` r
 deflate(100, as.Date("2018-01-01"), "08/2018", "ipca")
-#> 
-#> Downloading necessary data from IPEA's API
-#> ...
+#>   |                                                                              |                                                                      |   0%  |                                                                              |===========================                                           |  39%  |                                                                              |======================================================                |  77%  |                                                                              |====================================================================  |  97%  |                                                                              |======================================================================| 100%
 #> [1] 102.8496
 ```
 
-Citation
---------
+## Citation
 
 To cite `deflateBR` in publications, please use:
 
@@ -184,7 +172,6 @@ To cite `deflateBR` in publications, please use:
 citation('deflateBR')
 ```
 
-Author
-------
+## Author
 
 [Fernando Meireles](http://fmeireles.com)
