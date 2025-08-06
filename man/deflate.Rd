@@ -4,8 +4,13 @@
 \alias{deflate}
 \title{Deflate Nominal Brazilian Reais Using Various Price Indexes}
 \usage{
-deflate(nominal_values, nominal_dates, real_date, index = c("ipca",
-  "igpm", "igpdi", "ipc", "inpc"))
+deflate(
+  nominal_values,
+  nominal_dates,
+  real_date,
+  index = c("ipca", "igpm", "igpdi", "ipc", "inpc"),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{nominal_values}{A \code{numeric} vector containing nominal Brazilian Reais to deflate.}
@@ -14,17 +19,22 @@ deflate(nominal_values, nominal_dates, real_date, index = c("ipca",
 Values are set to the previous month, following the
 standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/publico/metodologiaCorrigirIndice.do?method=metodologiaCorrigirIndice}{Brazilian Central Bank}.}
 
-\item{real_date}{A value indicating the reference date to deflate nominal values in the format
-'MM/YYYY' (e.g., '01/2018' for January 2018).}
+\item{real_date}{A reference date to deflate nominal values. Can be either:
+\itemize{
+  \item A character string in 'MM/YYYY' format (e.g., '01/2018' for January 2018)
+  \item A Date object with length 1 (e.g., as.Date("2018-01-01"))
+}}
 
 \item{index}{Indicates the price index used to deflate nominal Reais. Valid options are: \code{ipca}, \code{igpm},
 \code{igpdi}, \code{ipc}, and \code{inpc}.}
+
+\item{verbose}{Logical indicating whether to show progress messages and progress bar during data download. Default is TRUE.}
 }
 \value{
 A \code{numeric} vector.
 }
 \description{
-\code{deflate()} uses data from the Brazilian Institute for Applied Economic Research's API (IPEADATA) to adjust nominal Brazilian Reais for inflation.
+\code{deflate()} is the main function of the deflateBR package. It uses data from the Brazilian Institute for Applied Economic Research's API (IPEADATA) to adjust nominal Brazilian Reais for inflation using various Brazilian price indexes.
 }
 \details{
 Each one of the five price indexes included
@@ -37,10 +47,17 @@ IGP-M, IGP-DI, and IPC are maintained by Getulio Vargas Foundation (FGV). For an
 reais <- rep(100, 5)
 actual_dates <- seq.Date(from = as.Date("2001-01-01"), to = as.Date("2001-05-01"), by = "month")
 
+# Using character string for reference date
 deflate(reais, actual_dates, "01/2018", "ipca")
+
+# Using Date object for reference date
+deflate(reais, actual_dates, as.Date("2018-01-01"), "ipca")
 
 # Using IGP-M index
 deflate(reais, actual_dates, "01/2018", "igpm")
+
+# Silent operation without progress messages
+deflate(reais, actual_dates, as.Date("2018-01-01"), "ipca", verbose = FALSE)
 }
 
 }
