@@ -25,18 +25,6 @@ Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/deflateBR?
 
 `deflateBR` is an `R` package used to deflate nominal Brazilian Reais using several popular price indexes.
 
-## What's New in Version 1.2.0
-
-This major release brings significant improvements:
-
-- **Simplified interface**: Unified `deflate()` function replaces previous wrapper functions
-- **Flexible date input**: Reference dates now accept both strings ('MM/YYYY') and Date objects  
-- **Enhanced API handling**: Improved error handling, retry mechanisms, and progress feedback
-- **Better user experience**: Optional verbose mode and cleaner architecture
-
-See `NEWS.md` for complete details and migration guide.
-
-
 ## How does it work?
 
 The `deflateBR`'s main function, `deflate`, requires three mandatory arguments to work: a `numeric` vector of nominal Reais (`nominal_values`); a `Date` vector of corresponding dates (`nominal_dates`); and a reference date (`real_date`), used to deflate the values. The reference date can be provided either as a character string in 'MM/YYYY' format or as a Date object. Additionally, you can specify the price index using the `index` argument and control output verbosity with the `verbose` argument. An example:
