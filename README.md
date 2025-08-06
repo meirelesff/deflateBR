@@ -2,8 +2,10 @@
 
 # deflateBR
 
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/meirelesff/deflateBR?branch=master&svg=true)](https://ci.appveyor.com/project/meirelesff/deflateBR)
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/meirelesff/deflateBR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/meirelesff/deflateBR/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 `deflateBR` is an `R` package used to deflate nominal Brazilian Reais
 using several popular price indexes.
@@ -25,9 +27,11 @@ library(deflateBR)
 
 # Deflate January 2000 reais
 deflate(nominal_values = 100, nominal_dates = as.Date("2000-01-01"), real_date = "01/2018")
-#> Found valid cache for IPCA index (547 records)
-#> Loading IPCA data from cache...
-#> Loaded 547 records from cache (1979-12 to 2025-06)
+#> No cache found for IPCA index
+#> Cache not available, downloading from IPEA API...
+#>   |                                                                              |                                                                      |   0%  |                                                                              |=============                                                         |  19%  |                                                                              |=========================================                             |  59%  |                                                                              |===========================================================           |  85%  |                                                                              |==================================================================    |  94%  |                                                                              |======================================================================| 100%
+#> Saving IPCA data to cache...
+#> Cached 547 records for IPCA index
 #> [1] 310.3893
 ```
 
@@ -51,9 +55,11 @@ following options to the `index =` argument: `ipca`, `igpm`, `igpdi`,
 ``` r
 # Deflate January 2000 reais using the INPC price index
 deflate(100, as.Date("2000-01-01"), "01/2018", index = "inpc")
-#> Found valid cache for INPC index (556 records)
-#> Loading INPC data from cache...
-#> Loaded 556 records from cache (1979-03 to 2025-06)
+#> No cache found for INPC index
+#> Cache not available, downloading from IPEA API...
+#>   |                                                                              |                                                                      |   0%  |                                                                              |=================================================                     |  70%  |                                                                              |======================================================================| 100%
+#> Saving INPC data to cache...
+#> Cached 556 records for INPC index
 #> [1] 318.1845
 ```
 
@@ -116,9 +122,11 @@ reference <- "01/2018"
 
 # Deflate using IGP-DI
 head(deflate(df$reais, df$dates, reference, "igpdi"))
-#> Found valid cache for IGPDI index (978 records)
-#> Loading IGPDI data from cache...
-#> Loaded 978 records from cache (1944-01 to 2025-06)
+#> No cache found for IGPDI index
+#> Cache not available, downloading from IPEA API...
+#>   |                                                                              |                                                                      |   0%  |                                                                              |===============                                                       |  21%  |                                                                              |=================                                                     |  24%  |                                                                              |=====================                                                 |  30%  |                                                                              |=======================================                               |  56%  |                                                                              |======================================================================| 100%
+#> Saving IGPDI data to cache...
+#> Cached 978 records for IGPDI index
 #> [1] 341.0412 342.7393 344.9315 345.5051 344.9379 346.6979
 ```
 
