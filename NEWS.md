@@ -12,6 +12,16 @@
 
 ## New Features
 
+### Data Caching System
+
+* **Local data caching**: Added comprehensive caching system that stores downloaded price index data locally in a "cache" directory, significantly improving performance for repeated API calls.
+
+* **Automatic cache management**: Cache files are automatically validated for structure and content. Invalid or corrupted cache files are automatically re-downloaded.
+
+* **Cache control**: Added `cache` parameter to `deflate()` function (default `TRUE`) allowing users to disable caching when fresh data is always required.
+
+* **Smart cache loading**: First call downloads and caches data; subsequent calls load from cache with detailed progress messages showing cache status.
+
 ### Enhanced Function Interface
 
 * **Flexible date input**: The `real_date` parameter now accepts both character strings in 'MM/YYYY' format and Date objects (e.g., `as.Date("2018-01-01")`), providing more flexibility for users.

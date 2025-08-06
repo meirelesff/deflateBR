@@ -9,7 +9,8 @@ deflate(
   nominal_dates,
   real_date,
   index = c("ipca", "igpm", "igpdi", "ipc", "inpc"),
-  verbose = TRUE
+  verbose = TRUE,
+  cache = TRUE
 )
 }
 \arguments{
@@ -29,6 +30,9 @@ standard methodology used by the \href{https://www3.bcb.gov.br/CALCIDADAO/public
 \code{igpdi}, \code{ipc}, and \code{inpc}.}
 
 \item{verbose}{Logical indicating whether to show progress messages and progress bar during data download. Default is TRUE.}
+
+\item{cache}{Logical indicating whether to use local caching to store downloaded price index data. 
+When TRUE, data is saved locally and reused in subsequent calls, improving performance. Default is TRUE.}
 }
 \value{
 A \code{numeric} vector.
@@ -58,6 +62,9 @@ deflate(reais, actual_dates, "01/2018", "igpm")
 
 # Silent operation without progress messages
 deflate(reais, actual_dates, as.Date("2018-01-01"), "ipca", verbose = FALSE)
+
+# Disable caching (always download fresh data)
+deflate(reais, actual_dates, "01/2018", "ipca", cache = FALSE)
 }
 
 }
