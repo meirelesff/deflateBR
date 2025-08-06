@@ -13,6 +13,6 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/meirelesff/deflatebr/
 BugReports: https://github.com/meirelesff/deflatebr/issues/
-RoxygenNote: 6.1.0
+RoxygenNote: 7.3.2
 Suggests: knitr,
     rmarkdown

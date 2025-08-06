@@ -7,9 +7,28 @@
 
 # Function to check real date
 clean_real_date <- function(real_date){
-
-  if(nchar(real_date) != 7 & substr(real_date, 3, 3) != "/") stop("'real_date' must be a character in the MM/YYYY format.")
-  lubridate::dmy(paste0("01/", real_date))
+  
+  # Handle Date objects
+  if (inherits(real_date, "Date")) {
+    if (length(real_date) != 1) {
+      stop("'real_date' must have length 1 when providing a Date object.")
+    }
+    return(real_date)
+  }
+  
+  # Handle character strings in MM/YYYY format
+  if (is.character(real_date)) {
+    if (length(real_date) != 1) {
+      stop("'real_date' must have length 1.")
+    }
+    if (nchar(real_date) != 7 || substr(real_date, 3, 3) != "/") {
+      stop("'real_date' must be a character in the MM/YYYY format.")
+    }
+    return(lubridate::dmy(paste0("01/", real_date)))
+  }
+  
+  # Invalid input type
+  stop("'real_date' must be either a Date object or a character string in MM/YYYY format.")
 }
 
 
